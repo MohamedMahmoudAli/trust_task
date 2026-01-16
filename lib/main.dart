@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:trust_task/core/injection/injection_container.dart' as di;
 import 'package:trust_task/core/localization/localization_extension.dart';
 import 'core/localization/localization_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await di.setupDependencies();
+
 
   final localizationService = LocalizationService();
   await localizationService.changeLanguage('en');
