@@ -1,4 +1,6 @@
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trust_task/core/cache/storage_service.dart';
 import 'package:trust_task/core/network/dio_client.dart';
 
 final sl = GetIt.instance;
@@ -24,18 +26,11 @@ Future<void> _initCategories() async {
   
 }
 Future<void> _initCore() async {
+  final sharedPrefs = await SharedPreferences.getInstance();
+  sl.registerLazySingleton(() => sharedPrefs);
+  sl.registerLazySingleton<StorageService>(() => StorageServiceImpl(sl()));
   sl.registerLazySingleton<DioClient>(() => DioClient());
-  // Cubit
-  
-  // Use Cases
-  
-  // Repository
- 
-
-  // Data Sources
-  
 }
-
 // 2. Product Details Feature
 Future<void> _initProducts() async {
   // Cubit
